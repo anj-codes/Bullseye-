@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var alertIsVisible: Bool = false // to add the pop - up
+    
+    @State private var knockKnockJoke: Bool = false
+    
     var body: some View {
         VStack {
                 Text("🎯🎯🎯\nPUT THE BULLSEYE AS CLOSE AS YOU CAN TO")
@@ -27,15 +32,36 @@ struct ContentView: View {
                     Slider(value: .constant(50), in: 1.0...100.0)
                     Text("100")
                         .bold()
-
-                    
+// This is for button
                 }
-                Button("Hit me") {
-                    
+            Button(action:{
+                print("Hello SwiftUI")
+                self.alertIsVisible = true
+            }) {
+                    Text("Hit me")
                 }
+            .alert("Hello there!", isPresented: $alertIsVisible) {
+                Button("Awesome") { }
+            } message: {
+                Text("This is my first pop-up")
+            }
+            
+// Add another button
+            Button(action:{
+                print("Hello SwiftUI")
+                self.knockKnockJoke = true
+            }) {
+                    Text("Knock Knock")
+                }
+            .alert("Who's There?", isPresented: $knockKnockJoke) {
+                Button("Boo!!!") { }
+            } message: {
+                Text("I have no joke")
+            }
+// end of the button
+            }
             }
         }
-    }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
